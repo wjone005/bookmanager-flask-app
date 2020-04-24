@@ -1,0 +1,73 @@
+<html>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+    <body>
+        <form method="POST" action="/">
+            <label for="title" sytle="text-align:center">Title:</label>
+            <br>
+            <input type="text" name="title">
+            <br>
+            <label for="author" sytle="text-align:center">Author:</label>
+            <br>
+            <input type="text" name="author">
+            <br>
+            <label for="publisher" sytle="text-align:center">Publisher:</label>
+            <br>
+            <input type="text" name="publisher">
+            <br>
+            <label for="date" sytle="text-align:center">Date:</label>
+            <br>
+            <input type="date" value="yyyy-mm-dd" name="date">
+            <br>
+            <label for="submit" sytle="text-align:center">Add</label>
+            <br>
+            <input type="submit" value="Add">
+        </form>
+        
+        
+        <h1>Books</h1>
+        <table style="width:100% text-align: center">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Date</th>
+            </tr>
+         {% for book in books %}
+        <tr>
+           <td>{{book.title}}</td> 
+           <td>{{book.author}}</td>
+           <td>{{book.publisher}}</td>
+           <td>{{book.date}}</td>
+        <form method="POST" action="./update">
+            <input type="hidden" value="{{book.title}}" name="oldtitle">
+            <input type="text" value="{{book.title}}" name="newtitle">
+            <input type="submit" value="Update">
+        </form>
+        </tr>
+        <tr>
+            <form method="POST" action="./delete" style="display: inline">
+                <input type="hidden" value="{{book.title}}" name="title">
+                <input type="submit" value="Delete">
+            </form>
+        </tr>
+        
+         {% endfor %}
+        </table>
+    </body>
+</html>
